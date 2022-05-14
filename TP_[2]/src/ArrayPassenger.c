@@ -330,20 +330,28 @@ void mostrarPasajero (Passenger unPasajero) {
 	char estado[51];
 	char clase[51];
 	if (unPasajero.isEmpty == 0) {
-		if(unPasajero.statusFlight==STATUS_ACTIVO){
-			strncpy(estado,"ACTIVO",51);
-		}else if(unPasajero.statusFlight==STATUS_DEMORADO){
-			strncpy(estado,"DEMORADO",51);
-		}else{
-			strncpy(estado,"CANCELADO",51);
+		switch(unPasajero.statusFlight){
+		case STATUS_ACTIVO:
+			strncpy(estado,"ACTIVO",sizeof(estado));
+			break;
+		case STATUS_DEMORADO:
+			strncpy(estado,"DEMORADO",sizeof(estado));
+			break;
+		case STATUS_CANCELADO:
+			strncpy(estado,"CANCELADO",sizeof(estado));
+			break;
 		}
-		if(unPasajero.typePassenger == PRIMERA_CLASE){
-			strncpy(clase,"PRIMERA CLASE",51);
-		}else if(unPasajero.typePassenger == CLASE_GENERAL){
-			strncpy(clase,"GENERAL",51);
-		}else{
-			strncpy(clase,"TURISTA",51);
-		}
+	    switch(unPasajero.typePassenger){
+	    case PRIMERA_CLASE:
+	    	strncpy(clase,"PRIMERA CLASE",sizeof(clase));
+	    	break;
+	    case CLASE_GENERAL:
+	    	strncpy(clase,"GENERAL",sizeof(clase));
+	    	break;
+	    case CLASE_TURISTA:
+	    	strncpy(clase,"TURISTA",sizeof(clase));
+	    	break;
+	    }
 		printf("%d  %-10s %-10s $%-7.2f  %-20s  %-11s %s\n",
 					unPasajero.id,
 					unPasajero.name,

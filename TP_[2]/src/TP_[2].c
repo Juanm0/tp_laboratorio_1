@@ -16,9 +16,6 @@
 #define LEN_ESTRUCT_HARDCODE 6
 
 
-//las estructuras se definen en el .h
-
-
 
 int main(void) {
 
