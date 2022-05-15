@@ -23,8 +23,8 @@ int main(void) {
 	setbuf(stdout, NULL);
 
 	Passenger sPasajeros[QTY_PASSENGER];
-	Passenger EstructuraHardcodeo[LEN_ESTRUCT_HARDCODE] = {{000, "Juan", "Navarro", 18000, "AAA",PRIMERA_CLASE,STATUS_ACTIVO,0 } ,
-							{000, "Violeta", "Perez", 43536, "AAA",CLASE_GENERAL,STATUS_DEMORADO,0},
+	Passenger EstructuraHardcodeo[LEN_ESTRUCT_HARDCODE] = {{000, "Juan", "Navarro", 18000, "AAA",PRIMERA_CLASE,STATUS_CANCELADO,0 } ,
+							{000, "Violeta", "Perez", 43536, "AAA",CLASE_GENERAL,STATUS_ACTIVO,0},
 							{000, "Esteban", "Quito", 566500, "BDA",CLASE_TURISTA,STATUS_CANCELADO,0},
 							{000, "Baracko", "Bama", 35367, "FGF",PRIMERA_CLASE,STATUS_ACTIVO,0},
 							{000,"Marcos", "Placido", 24523, "DDD",CLASE_GENERAL,STATUS_ACTIVO,0},

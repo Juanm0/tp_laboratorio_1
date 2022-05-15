@@ -39,7 +39,7 @@ int sortPassengers(Passenger* list, int len, int order) {
 
 	int retorno = -1;
 	Passenger auxList;
-	int estaOrdenado;//1 es verdadero
+	int estaOrdenado;
 //order = 1 es ASENDENTE y order = 0 es DESENDENTE
 	if(list != NULL && len > 0 && order == 1) {
 
@@ -85,7 +85,7 @@ int sortPassengersByCode(Passenger* list, int len, int order) {
 
 	int retorno = -1;
 	Passenger auxList;
-	int estaOrdenado;//1 es verdadero
+	int estaOrdenado;
 //order = 1 es ASENDENTE y order = 0 es DESENDENTE
 	if(list != NULL && len > 0 && order == 1) {
 
@@ -93,15 +93,21 @@ int sortPassengersByCode(Passenger* list, int len, int order) {
 			estaOrdenado = 1;
 			len--;
 			for(int i = 0; i < len; i++) {
-				if (strcmp(list[i].flyCode,list[i+1].flyCode) > 0 ||
-					(strcmp(list[i].flyCode,list[i+1].flyCode) == 0 && list[i].statusFlight != STATUS_ACTIVO
-							&& list[i+1].statusFlight == STATUS_ACTIVO)) {
-					//si son iguales devuelve 0, si es mayor a 0, es asendente
+				if ((list[i].statusFlight == STATUS_ACTIVO && (strcmp(list[i].flyCode,list[i+1].flyCode))>0)) {
+
 					auxList = list[i];
 					list[i] = list[i+1];
 					list[i+1] = auxList;
 					estaOrdenado = 0;
 				}
+					if ((list[i].statusFlight != STATUS_ACTIVO)){//deja a todos los activos arriba de la lista
+						auxList = list[i];
+						list[i] = list[i+1];
+						list[i+1] = auxList;
+						estaOrdenado = 0;
+					}
+
+
 			}
 
 		}while(estaOrdenado == 0);
@@ -111,15 +117,20 @@ int sortPassengersByCode(Passenger* list, int len, int order) {
 					estaOrdenado = 1;
 					len--;
 					for(int i = 0; i < len; i++) {
-						if (strcmp(list[i].flyCode,list[i+1].flyCode) < 0 ||
-							(strcmp(list[i].flyCode,list[i+1].flyCode) == 0 && (list[i].statusFlight == STATUS_ACTIVO
-								&& list[i+1].statusFlight != STATUS_ACTIVO))) {
-							//si son iguales devuelve 0, si es menor a 0, es desendente
+						if ((list[i].statusFlight == STATUS_ACTIVO && (strcmp(list[i].flyCode,list[i+1].flyCode))>0)) {
+
 							auxList = list[i];
 							list[i] = list[i+1];
 							list[i+1] = auxList;
 							estaOrdenado = 0;
 						}
+							if ((list[i].statusFlight == STATUS_ACTIVO)){//Deja a todos los activos abajo de la lista
+								auxList = list[i];
+								list[i] = list[i+1];
+								list[i+1] = auxList;
+								estaOrdenado = 0;
+							}
+
 					}
 
 				}while(estaOrdenado == 0);
@@ -157,8 +168,8 @@ int altaPasajero (Passenger pArray[], int len) {
 				&& (utn_getNombre(pArray[index].flyCode,sizeof(pArray[index].flyCode), "Ingrese FlyCode: ", "Error. El Flycode ingresado es invalido", 3))==0
 				&& (utn_getNumero(&pArray[index].typePassenger, "[1]PRIMERA CLASE\n[2]GENERAL\n[3]TURISTA\nIngrese Tipo de Pasajero: ", "eRROR..El tipo de pasajero es invalido", 3, 1, 3))==0
 				&& (utn_getNumero(&pArray[index].statusFlight, "[1]ACTIVO\n[2]DEMORADO\n[3]CANCELADO\nIngrese estado de vuelo: ", "eRROR..El estado de vuelo es invalido", 3, 1, 3))==0
-				&& (utn_getFlotante(&pArray[index].price,"Ingrese precio: $", "eRROR..Precio invalido", 0, 7632625, 3))==0)
-			{//El vuelo redondo mas caro del mundo sale 76.3 millones de pesos (65mil DLS), por eso use ese numero
+				&& (utn_getFlotante(&pArray[index].price,"Ingrese precio: $", "eRROR..Precio invalido", 0, 8000000, 3))==0)
+			{//El vuelo redondo mas caro del mundo sale 7.63 millones de pesos (65mil DLS), por eso use ese numero
 				pArray[index].id = autoIncrementarId();
 				pArray[index].isEmpty = 0;//cero es falso en C, el espacio esta ocupado
 				addPassenger(pArray, len,pArray[index].id, pArray[index].name, pArray[index].lastName, pArray[index].price, pArray[index].typePassenger, pArray[index].flyCode);
@@ -411,7 +422,6 @@ int printPassengers(Passenger* list, int length)
 			}
 
 		}
-
 		if(opcionChar != '1') {
 			system("cls");
 			printf("     ***********************  LISTA DE PASAJEROS  **********************     \n");
