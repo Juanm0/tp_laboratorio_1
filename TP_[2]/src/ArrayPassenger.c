@@ -94,7 +94,7 @@ int sortPassengersByCode(Passenger* list, int len, int order) {
 			len--;
 			for(int i = 0; i < len; i++) {
 				if ((list[i].statusFlight == STATUS_ACTIVO && (strcmp(list[i].flyCode,list[i+1].flyCode))>0)) {
-
+					//Ordena de forma ASENDENTE a los activos
 					auxList = list[i];
 					list[i] = list[i+1];
 					list[i+1] = auxList;
@@ -117,14 +117,14 @@ int sortPassengersByCode(Passenger* list, int len, int order) {
 					estaOrdenado = 1;
 					len--;
 					for(int i = 0; i < len; i++) {
-						if ((list[i].statusFlight == STATUS_ACTIVO && (strcmp(list[i].flyCode,list[i+1].flyCode))>0)) {
-
+						if ((list[i].statusFlight == STATUS_ACTIVO && (strcmp(list[i].flyCode,list[i+1].flyCode))<0)) {
+							//Ordena de forma DESENDENTE a los activos
 							auxList = list[i];
 							list[i] = list[i+1];
 							list[i+1] = auxList;
 							estaOrdenado = 0;
 						}
-							if ((list[i].statusFlight == STATUS_ACTIVO)){//Deja a todos los activos abajo de la lista
+							if ((list[i].statusFlight != STATUS_ACTIVO)){//Deja a todos los activos arriba de la lista
 								auxList = list[i];
 								list[i] = list[i+1];
 								list[i+1] = auxList;
@@ -414,7 +414,7 @@ int printPassengers(Passenger* list, int length)
 				sortPassengers(list, length, 0);
 			}
 		}else if(opcionInt == 2){
-			utn_getCaracterSoN(&opcionChar, "En que orden quiere ver la lista?\nAsendente o desendente? (A/D): ", "eRROR..Ingrese (A/D)", 'a', 'd',3);
+			utn_getCaracterSoN(&opcionChar, "En que orden quiere ver la lista de ACTIVOS?\nAsendente o desendente? (A/D): ", "eRROR..Ingrese (A/D)", 'a', 'd',3);
 			if(opcionChar == 'a') {
 				sortPassengersByCode(list, length, 1);
 			}else if(opcionChar == 'd') {
