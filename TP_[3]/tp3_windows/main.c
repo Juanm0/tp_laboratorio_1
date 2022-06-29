@@ -8,6 +8,7 @@
 #include "LinkedList.h"
 #include "Controller.h"
 #include "Passenger.h"
+#include "menu_tp3.h"
 
 /****************************************************
     Menu:
@@ -28,17 +29,41 @@
 int main()
 {
 	setbuf(stdout,NULL);
-    int option = 0;
+    int opcion = 0;
 
     LinkedList* listaPasajeros = ll_newLinkedList();
     do{
-        switch(option)
+    	opcion = menu();
+        switch(opcion)
         {
             case 1:
                 controller_loadFromText("data.csv",listaPasajeros);
                 break;
+
+            case 2:
+            	controller_loadFromBinary("data.bin",listaPasajeros);
+            	break;
+            case 3:
+            	controller_addPassenger(listaPasajeros);
+            	break;
+            case 4:
+            	break;
+            case 5:
+            	break;
+            case 6:
+            	break;
+            case 7:
+            	break;
+            case 8:
+            	break;
+            case 9:
+            	break;
+            case 10:
+            	opcion = 11;
+            	break;
         }
-    }while(option != 10);
+    }while(opcion != 11);
     return 0;
 }
+
 
