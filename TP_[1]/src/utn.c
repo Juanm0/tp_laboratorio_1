@@ -170,33 +170,6 @@ int esNombre(char* cadena,int longitud)
 	}
 	return retorno;
 }
-/**
- * @brief No permite que los nombres sean un ENTER
- *
- * @param cadena
- * @return retorna 0 si el nombre es un ENTER o 1 si el nombre no es un ENTER
- */
-static int noEnterChar(char* cadena) {
-	int retorno = 1;
-	if(cadena[0]=='\0'){
-		retorno = 0;
-	}
-	return retorno;
-}
-
-/**
- * @brief No permite que los float sean un ENTER
- *
- * @param cadena
- * @return retorna 0 si el nombre es un ENTER o 1 si el nombre no es un ENTER
- */
-static int noEnterFloat(float* numeroFlotante) {
-	int retorno = 1;
-	if(numeroFlotante[0]=='\0'){
-		retorno = 0;
-	}
-	return retorno;
-}
 
 int utn_getNombre(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos)
 {
@@ -205,8 +178,7 @@ int utn_getNombre(char* pResultado, int longitud,char* mensaje, char* mensajeErr
 	while(reintentos>=0)
 	{
 		printf("%s",mensaje);
-		if(getNombre(bufferString,sizeof(bufferString)) == 0 && strnlen(bufferString,sizeof(bufferString)) < longitud
-				&& noEnterChar(bufferString))
+		if(getNombre(bufferString,sizeof(bufferString)) == 0 && strnlen(bufferString,sizeof(bufferString)) < longitud )
 		{
 			strncpy(pResultado,bufferString,longitud);
 			retorno = 0;
@@ -245,7 +217,7 @@ int utn_getFlotante(float* pResultado, char* mensaje, char* mensajeError, float 
 	while(reintentos>=0)
 	{
 		printf("%s",mensaje);
-		if(getFloat(&bufferFloat) == 0 && noEnterFloat(&bufferFloat))
+		if(getFloat(&bufferFloat) == 0)
 		{
 			if(bufferFloat >= minimo && bufferFloat <= maximo)
 			{
@@ -345,45 +317,6 @@ int esDescripcion(char* cadena,int longitud)
 	return retorno;
 }
 
-int esAlfaNumerico(char* cadena,int longitud)
-{
-	int i=0;
-	int retorno = 1;
-
-	if(cadena != NULL && longitud > 0)
-	{
-		for(i=0 ; cadena[i] != '\0' && i < longitud; i++)
-		{
-			if((cadena[i] < 'A' || cadena[i] > 'Z' ) && (cadena[i] < 'a' || cadena[i] > 'z' ) && (cadena[i] < '0' || cadena[i] > '9' ) )
-			{
-				retorno = 0;
-				break;
-			}
-		}
-	}
-	return retorno;
-}
-
-int utn_getAlfanumerico(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos)
-{
-	char bufferString[4096];
-	int retorno = -1;
-	while(reintentos>=0)
-	{
-		printf("%s",mensaje);
-		if(getAlfanumerico(bufferString,sizeof(bufferString)) == 0 && strnlen(bufferString,sizeof(bufferString)) < longitud
-				&& noEnterChar(bufferString))
-		{
-			strncpy(pResultado,bufferString,longitud);
-			retorno = 0;
-			break;
-		}
-		printf("%s\n(le quedan %d reintentos)\n",mensajeError,reintentos);
-		reintentos--;
-	}
-	return retorno;
-}
-
 int getDescripcion(char* pResultado, int longitud)
 {
     int retorno=-1;
@@ -393,24 +326,6 @@ int getDescripcion(char* pResultado, int longitud)
     {
     	if(	getString(buffer,sizeof(buffer))==0 &&
     		esDescripcion(buffer,sizeof(buffer)) &&
-			strnlen(buffer,sizeof(buffer))<longitud)
-    	{
-    		strncpy(pResultado,buffer,longitud);
-			retorno = 0;
-		}
-    }
-    return retorno;
-}
-
-int getAlfanumerico(char* pResultado, int longitud)
-{
-    int retorno=-1;
-    char buffer[4096];
-
-    if(pResultado != NULL)
-    {
-    	if(	getString(buffer,sizeof(buffer))==0 &&
-    		esAlfaNumerico(buffer,sizeof(buffer)) &&
 			strnlen(buffer,sizeof(buffer))<longitud)
     	{
     		strncpy(pResultado,buffer,longitud);

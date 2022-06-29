@@ -145,32 +145,6 @@ int getDescripcion(char* pResultado, int longitud);
  * @return Retorna 1 (verdadero) si la cadena es valida y 0 (falso) si no lo es
  */
 int esDescripcion(char* cadena,int longitud);
-/**
- * @brief Solicita un codigo alfanumerico al usuario, luego de verificarlo devuelve el resultado
- *
- * @param pResultado Puntero al espacio de memoria donde se dejara el resultado de la funcion
- * @param longitud  Es la longitud del array resultado
- * @param mensaje Es el mensaje a ser mostrado
- * @param mensajeError Es el mensaje de Error a ser mostrado
- * @param reintentos  Cantidad de reintentos
- * @return retorna 0 si se obtuvo el codigo y (-1) si no
- */
-int utn_getAlfanumerico(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos);
-/**
- * @brief Obtiene un string valido como alfanumerico
- *
- * @param pResultado
- * @param longitud
- * @return Retorna 0 (EXITO) si se obtiene el string y -1 (ERROR) si no
- */
-int getAlfanumerico(char* pResultado, int longitud);
-/**
- * @brief Verifica si la cadena ingresada es un codigo alfanumerico valido
- *
- * @param cadena Cadena de caracteres a ser analizada
- * @param longitud
- * @return Retorna 1 (verdadero) si la cadena es valida y 0 (falso) si no lo es
- */
-int esAlfaNumerico(char* cadena,int longitud);
+
 
 #endif /* UTN_H_ */

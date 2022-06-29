@@ -32,7 +32,12 @@ struct
 	int isEmpty;//0 es falso (no esta vacio)
 
 }typedef Passenger;
-
+/**
+ * @brief Muestra el menu para el ABM de pasajeros
+ *
+ * @return retorna la opcion seleccionada
+ */
+int menu(void);
 /**
  * @brief Funcion que permite auto incrementar un campo ID
  *
@@ -40,11 +45,11 @@ struct
  */
 int autoIncrementarId();
 /**
- * @brief Funcion que me permite realizar el alta de los Pasajeros en una lista auxiliar
+ * @brief Funcion que me permite realizar el alta de los Pasajeros
  *
  * @param pArray Estructura tipo Passenger
  * @param len tamaño del array
- * @return -1 si el usuario no confirma el alta o (0) si todoOk
+ * @return
  */
 int altaPasajero (Passenger pArray[], int len);
 /**
