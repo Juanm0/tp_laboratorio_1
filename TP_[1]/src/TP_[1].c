@@ -49,7 +49,6 @@ int main(void) {
 	do
 	{
 		opcion = menu(kilometros,precioAerolineas,precioLatam);
-
 		switch(opcion)
 	{
 	case 1:

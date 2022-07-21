@@ -6,6 +6,7 @@
  */
 
 
+#include "validaciones_tp1.h"
 #include "utn.h"
 
 float validarKilometros() {
